@@ -5,9 +5,30 @@ format: gfm
 editor: visual
 ---
 
-I'm taking data from the Bar-On paper about relative abundance of microbes (and animals, etc) in different environments: Bar-On et al 2018 PNAS. 
+```{r setup, message=FALSE}
+library(tidyverse)
+theme_set(theme_classic())
+```
 
-Bar-On get ~10^26 "microbiome" (i.e., host-associated) cells, and ~10^30 total microbial cells (see their supplmenetal information, top of page 61.)
+I'm taking data from the Bar-On paper about relative abundance of microbes (and animals, etc) in different environments: Bar-On et al 2018 PNAS.
 
-Thus, the total number of host-associated cells is ~0.01% of the 'environmental' cells.
+Bar-On get \~10\^26 "microbiome" (i.e., host-associated) cells, and \~10\^30 total microbial cells (see their supplmenetal information, top of page 61.)
 
+Thus, the total number of host-associated cells is \~0.01% of the 'environmental' cells.
+
+# Power vs doubling time
+
+I feel like power is inversely related to doubling time when all else is held constant. Can't really justify that mathematically but I feel it in my heart.
+
+```{r, message=FALSE}
+log.td <- seq(0, 5, length.out = 1000)
+td <- 10^log.td
+power <- 1/td
+d <- tibble(log.td, td, power)
+
+p <- ggplot(d, aes(x=log.td, y=power)) + 
+  geom_line() +
+  scale_y_log10() +
+  xlab(expression(paste(log[10], "(doubling time, hr)")))
+print(p)
+```
