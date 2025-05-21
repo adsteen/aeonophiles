@@ -190,7 +190,7 @@ breaks.names <- c("1 hr", "1 day", "1 month", "1 yr", "10 yr", "100 yr", "1000 y
 colors <- c("#908C13", "#2B5597", "#990000","#674422")
 
 # the plot
-ggplot(all, aes(x=double, y=abund)) + 
+conceptual_fig <- ggplot(all, aes(x=double, y=abund)) + 
   stat_density_2d(
     aes(fill = envt, alpha = after_stat(level)), 
     geom = "polygon",
@@ -208,6 +208,7 @@ ggplot(all, aes(x=double, y=abund)) +
         legend.position = "none",
         axis.text.x = element_text(angle=-45, hjust=0),
         plot.margin = margin(0.1,0.25,0.1,0.1, "in"))
+print(conceptual_fig)
 ```
 
 ![](readme_files/figure-commonmark/unnamed-chunk-1-1.png)
